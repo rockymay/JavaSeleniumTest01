@@ -29,7 +29,7 @@ public class ChromeTest {
 		driver.findElement(By.name("q")).sendKeys("Industry Connect");
 		driver.findElement(By.name("btnK")).click();
 		Thread.sleep(5000);
-		driver.close();
+		//driver.close();
 	}
 
 }
