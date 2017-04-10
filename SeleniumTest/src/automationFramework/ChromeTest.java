@@ -1,6 +1,6 @@
 package automationFramework;
+import java.io.IOException;
 import java.util.*;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ChromeTest {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		
 		
@@ -40,6 +40,7 @@ public class ChromeTest {
         
         //Define IWebDriver
         driver.navigate().to("https://demo.econz.co.nz:1000/AdminPortal/Account/Login/exptest");
+        Thread.sleep(1000);
         driver.manage().window().maximize();
 
         //####Login Test Here #####
@@ -142,16 +143,15 @@ public class ChromeTest {
          driver.findElement(By.xpath("/html/body/div[5]/form/div[1]/div[2]/button[1]")).click();
 	
 	}
-	public static void DropdownSelect(WebDriver driver)
+	public static void DropdownSelect(WebDriver driver) throws IOException
 	{
 		//Random rnd = new Random();
         //define Double Click Functions
 		
 		
-		 driver.findElement(By.cssSelector("body > div.k-widget.k-window > div.k-popup-edit-form.k-window-content.k-content > div > div:nth-child(6) > span > span > span.k-input")).click();
-         //int optionNum = (driver.findElement(By.cssSelector("body > div.k-animation-container.km-popup > div > ul"))).findElements(By.className("k-item")).size;
-         //String ButtonLogoCSS = "body > div.k-animation-container.km-popup > div > ul > li:nth-child(" + (rnd.nextInt(optionNum)+1) + ")";
-         driver.findElement(By.cssSelector("body > div.k-animation-container.km-popup > div > ul > li:nth-child(5)")).click();
+		 driver.findElement(By.xpath("/html/body/div[6]/div[2]/div/div[6]/span/span/span[1]")).click();
+         driver.findElement(By.xpath("/html/body/div[7]/div/ul/li[2]/table/tbody/tr/td[1]/div")).click();
+		 driver.findElement(By.xpath("/html/body/div[7]/div/ul/li[2]/table/tbody/tr/td[1]/div")).click();
          
        //NextScreen
          driver.findElement(By.cssSelector("body > div.k-widget.k-window > div.k-popup-edit-form.k-window-content.k-content > div > div:nth-child(10) > span > span > span.k-input")).click();
