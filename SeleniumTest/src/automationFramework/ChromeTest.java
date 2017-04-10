@@ -110,8 +110,26 @@ public class ChromeTest {
         VerifyResult(driver, editRecord, "Edit Existing Record", "AddUpdate");
 
 
+      //######## Delete Function Test Here#########
         
-        driver.close();
+        Filter(driver, editRecord.get(0));
+        
+      
+        //Save Selected Record into deleteRecord 
+        List<String> deleteRecord = new ArrayList<String>();
+
+        deleteRecord.add(driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr[1]/td[1]")).getText());
+        deleteRecord.add(driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr[1]/td[2]")).getText());
+        deleteRecord.add(driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr[1]/td[4]")).getText());
+        deleteRecord.add(driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr[1]/td[6]")).getText());
+        System.out.println("You are trying to delet button: "+  "/n" + deleteRecord.get(0)+ "/n" + deleteRecord.get(1) +"/n" + deleteRecord.get(2) +"/n"  +deleteRecord.get(3));
+        
+        driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr[1]/td[14]/a[2]")).click();
+        //Delete Action Confirm
+        driver.findElement(By.xpath("//*[@id='container']/div/form/div/input")).click();
+
+        //Verify Deletion Successful
+        VerifyResult(driver, deleteRecord, "Delete Existing Record", "Del");
 		
 	}
 	public static void Filter(WebDriver driver, String text) throws InterruptedException
@@ -168,7 +186,8 @@ public class ChromeTest {
                String expectMessage = "No items to display";
                // Thread.Sleep(500);
                 String actualMessagge = driver.findElement(By.cssSelector("#grid > div.k-pager-wrap.k-grid-pager.k-widget > span.k-pager-info.k-label")).getText();
-                if (expectMessage==actualMessagge)
+               	System.out.println(actualMessagge);
+                if (expectMessage.equals(actualMessagge))
                 {System.out.println(message + " function test passed!");}
 
                 else
@@ -176,11 +195,8 @@ public class ChromeTest {
                     for (int i = 1; i < 2; i++)
                     {
                     	String resultBtnNm = driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr[1]/td[1]")).getText();
-                    	String resultBtnTt = driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr[1]/td[2]")).getText();
-                    	String resultPreCdt = driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr[1]/td[4]")).getText();
-                    	String resultVaUpdt = driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr[1]/td[6]")).getText();
-
-                        if (resultBtnNm == newValue.get(0) && resultBtnTt == newValue.get(1) && resultPreCdt == newValue.get(2) && resultVaUpdt == newValue.get(3))
+                    	
+                        if (resultBtnNm.equals(newValue.get(0)))
                         {
                         	System.out.println(message + " function test FAILED!!!!!");
                         	System.out.println("There might be duplicate records, delete them and retry again");
@@ -192,11 +208,10 @@ public class ChromeTest {
 
             case ("AddUpdate"):
             	String result1 = driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr/td[1]")).getText();
-            	String result2 = driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr/td[2]")).getText();
-            	String result3 = driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr/td[4]")).getText();
-            	String result4 = driver.findElement(By.xpath("//*[@id='grid']/div[4]/table/tbody/tr/td[6]")).getText();
-                
-                if (result1 == newValue.get(0) && result2 == newValue.get(1) && result3 == newValue.get(2) && result4 == newValue.get(3))
+            	
+            	
+            	
+                if (result1.equals(newValue.get(0)))
                 { System.out.println(message + " function test passed!"); }
                 else{ System.out.println(message + " function test FAILED!"); }
                 break;
